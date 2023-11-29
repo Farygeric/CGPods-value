@@ -1,0 +1,20 @@
+from bs4 import BeautifulSoup
+import requests
+
+header = {'User-Agent': 'Mozilla/5.0'}
+url = 'https://caseguru.ru/product/cgpods_b/'
+
+
+def get_data(ur):
+    req = requests.get(ur,headers=header)
+    soup = BeautifulSoup(req.content, "html.parser", from_encoding='utf-8')
+    price = soup.find(class_='p')
+    ans = 'Сайт: https://caseguru.ru/product/cgpods_b/ \nЦена: '
+    for i in price:
+        ans += i
+    return ans
+
+
+if __name__ == '__main__':
+    a = get_data(url)
+    print(a)
